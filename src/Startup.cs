@@ -20,7 +20,9 @@ namespace Products
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CatalogoDB"));
+            // services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CatalogoDB"));
+            services.AddDbContext<DataContext>(opt => 
+                opt.UseSqlServer(Configuration.GetConnectionString("ProductDB")));
             services.AddScoped<CategoryRepository, CategoryRepository>();
             services.AddScoped<ProductRepository, ProductRepository>();
             services.AddControllers();
