@@ -23,6 +23,8 @@ namespace Products.Models
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         [Range(1, int.MaxValue, ErrorMessage = "Categoria inválida")]        
         //Propriedade de navegação
+
+        public int CategoryId { get; set; }
         public Category Category { get; set; }
     }
 }
