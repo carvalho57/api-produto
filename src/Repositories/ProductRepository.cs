@@ -20,12 +20,14 @@ namespace Products.Repositories
         public async Task<List<Product>> Get()
         {
             return await _context.Products
-                .Include(x => x.Category).AsNoTracking().ToListAsync();
+                .Include(x => x.Category)
+                .AsNoTracking()
+                .ToListAsync();
         }
 
         public async Task<Product> GetById(int id)
         {
-            return await _context.Products.AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
+            return await _context.Products.Include(x => x.Category).AsNoTracking().FirstOrDefaultAsync(x => x.Id == id);
         }
 
         public async Task<List<Product>> GetByCategory(int id) 

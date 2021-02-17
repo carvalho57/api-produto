@@ -8,11 +8,9 @@ using Products.Repositories;
 // Endpoint -> URL
 namespace Products.Controllers
 {
-
     [Route("categories")]
     public class CategoryController : ControllerBase
     {
-
         private readonly CategoryRepository _repository;
 
         public CategoryController(CategoryRepository repository)
@@ -31,7 +29,7 @@ namespace Products.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Category>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<Category>>> Get()
         {
             var categories = await _repository.Get();
             return Ok(categories);

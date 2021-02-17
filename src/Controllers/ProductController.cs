@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Products.Models;
 using Products.Repositories;
@@ -17,6 +18,7 @@ namespace Products.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<List<Product>>> Get()
         {
             return await _repository.Get();
@@ -24,6 +26,7 @@ namespace Products.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Product>> GetById(int id)
         {
             return await _repository.GetById(id);
@@ -31,12 +34,13 @@ namespace Products.Controllers
 
         [HttpGet]
         [Route("categories/{id:int}")]
+        [AllowAnonymous]
         public async Task<ActionResult<List<Product>>> GetByCategory(int id)
         {
             return await _repository.GetByCategory(id);
         }
 
-         [HttpPost]
+        [HttpPost]
         public async Task<ActionResult> Post([FromBody] Product product)
         {
 

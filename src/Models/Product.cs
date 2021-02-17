@@ -18,6 +18,7 @@ namespace Products.Models
 
         [Required(ErrorMessage = "Este campo é obrigatorio")]
         [Range(0.1, int.MaxValue, ErrorMessage = "O preço deve ser maior que zero")]        
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Este campo é obrigatorio")]
