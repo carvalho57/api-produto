@@ -4,11 +4,10 @@ Uma api simples data driven que retorna os dados de produtos.
 
 
 # Coisas que serao vistas
-
-[ ] Autenticacao com  JWT
-[ ] Compressao
-[ ] Versionamento
-[ ] EF Core 3
+- [X] Autenticacao com  JWT
+- [X] Compressao
+- [X] Versionamento
+- [X] EF Core 3
 
 # Notas
 Self-Hosting (Auto hospedada)
@@ -40,4 +39,30 @@ dotnet add package Microsoft.EntityFrameworkCore.InMemory;
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer;
 dotnet tool install --global dotnet-ef //Install Ef Core tool para executar migrations
 dotnet add package Microsoft.EntityFrameworkCore.Design //adicionar para gerar as migrations
+
+Migrations
+dotnet ef migrations add InitialCreate // Gera migrations
+dotnet ef database update //
+
+
+Autenticação e Autorização
+Autenticação - Quem é 
+Autorização -  O que pode fazer
+
+Command - Authenticação
+dotnet add package Microsoft.AspNetCore.Authentication
+
+- JWT
+dotnet add package Microsoft.AspNetCore.Authentication.JwtBearer
+
+-- Documentação
+Swagger - Open API
+dotnet add package Swashbuckle.AspNetCore
+
+
+Performance e outras coisas
+Compressão de dados (GzipCompressionProvider)
+Versionamento de api v1/categories ou categories/v1
+Cache
+
 

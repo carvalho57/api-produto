@@ -26,6 +26,7 @@ namespace Products
         {
 
             services.AddCors();
+        
             services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CatalogoDB"));
             // services.AddDbContext<DataContext>(opt =>
             //     opt.UseSqlServer(Configuration.GetConnectionString("ProductDB")));
@@ -55,7 +56,7 @@ namespace Products
 
             services.AddSwaggerGen(x =>
             {
-                x.SwaggerDoc("v1",new OpenApiInfo { Title = "Catalogo Produtos", Version = "v1"});
+                x.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalogo Produtos", Version = "v1" });
             });
         }
 
@@ -68,15 +69,15 @@ namespace Products
             app.UseHttpsRedirection();
 
             app.UseSwagger();
-            app.UseSwaggerUI(x => {
-                x.SwaggerEndpoint("/swagger/v1/swagger.json","Catalogo v1");
+            app.UseSwaggerUI(x =>
+            {
+                x.SwaggerEndpoint("/swagger/v1/swagger.json", "Catalogo v1");
             });
-            
+
             app.UseRouting();
 
             app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
-
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
