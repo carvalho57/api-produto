@@ -9,6 +9,7 @@ using Products.Repositories;
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 
 namespace Products
 {
@@ -23,6 +24,8 @@ namespace Products
 
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddCors();
             services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CatalogoDB"));
             // services.AddDbContext<DataContext>(opt =>
             //     opt.UseSqlServer(Configuration.GetConnectionString("ProductDB")));
@@ -50,7 +53,10 @@ namespace Products
                 };
             });
 
-
+            services.AddSwaggerGen(x =>
+            {
+                x.SwaggerDoc("v1",new OpenApiInfo { Title = "Catalogo Produtos", Version = "v1"});
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -61,8 +67,14 @@ namespace Products
 
             app.UseHttpsRedirection();
 
+            app.UseSwagger();
+            app.UseSwaggerUI(x => {
+                x.SwaggerEndpoint("/swagger/v1/swagger.json","Catalogo v1");
+            });
+            
             app.UseRouting();
 
+            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
             app.UseAuthentication();
 
             app.UseAuthorization();

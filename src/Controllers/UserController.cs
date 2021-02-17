@@ -27,6 +27,7 @@ namespace Products.Controllers
 
             try
             {
+                user.Role = ERole.Employee;
                 await _repository.Create(user);
                 return Ok(new {message = "Usuario cadastrado com sucesso!"});
             }

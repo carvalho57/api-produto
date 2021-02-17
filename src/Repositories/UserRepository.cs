@@ -19,7 +19,7 @@ namespace Products.Repositories
         }
        
         public async Task<User> Create(User user)
-        {
+        {            
             _context.Users.Add(user);
             await _context.SaveChangesAsync();
             return user;

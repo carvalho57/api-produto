@@ -19,6 +19,7 @@ namespace Products.Controllers
 
         [HttpGet]
         [AllowAnonymous]
+        [ResponseCache(VaryByHeader = "User-Agent", Location = ResponseCacheLocation.Any, Duration = 30)]
         public async Task<ActionResult<List<Product>>> Get()
         {
             return await _repository.Get();
@@ -26,6 +27,7 @@ namespace Products.Controllers
 
         [HttpGet]
         [Route("{id:int}")]
+        [ResponseCache(VaryByHeader = "User-Agent", Location = ResponseCacheLocation.Any, Duration = 30)]
         [AllowAnonymous]
         public async Task<ActionResult<Product>> GetById(int id)
         {
