@@ -22,8 +22,7 @@ namespace Products.Models
         public decimal Price { get; set; }
 
         [Required(ErrorMessage = "Este campo é obrigatorio")]
-        [Range(1, int.MaxValue, ErrorMessage = "Categoria inválida")]        
-        //Propriedade de navegação
+        [Range(1, int.MaxValue, ErrorMessage = "Categoria inválida")]                
 
         public int CategoryId { get; set; }
         public Category Category { get; set; }
