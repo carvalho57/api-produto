@@ -21,12 +21,10 @@ namespace Products
         }
 
         public IConfiguration Configuration { get; }
-
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddCors();
-        
+
             services.AddDbContext<DataContext>(opt => opt.UseInMemoryDatabase("CatalogoDB"));
             // services.AddDbContext<DataContext>(opt =>
             //     opt.UseSqlServer(Configuration.GetConnectionString("ProductDB")));
@@ -34,7 +32,6 @@ namespace Products
             services.AddScoped<ProductRepository, ProductRepository>();
             services.AddScoped<UserRepository, UserRepository>();
 
-            services.AddControllers();
 
             var key = Encoding.ASCII.GetBytes(Settings.Secret);
             services.AddAuthentication(x =>
@@ -58,6 +55,7 @@ namespace Products
             {
                 x.SwaggerDoc("v1", new OpenApiInfo { Title = "Catalogo Produtos", Version = "v1" });
             });
+            services.AddControllers();
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -76,7 +74,7 @@ namespace Products
 
             app.UseRouting();
 
-            app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            app.UseCors(x => x.AllowAnyMethod().AllowAnyOrigin().AllowAnyHeader());
             app.UseAuthentication();
             app.UseAuthorization();
 
